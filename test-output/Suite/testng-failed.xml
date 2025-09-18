@@ -4,17 +4,17 @@
   <listeners>
     <listener class-name="utilities.ExtentReportManager"/>
   </listeners>
-  <test thread-count="5" name="Test(failed)">
-    <parameter name="os" value="Windows"/>
+  <test thread-count="5" name="Linux-chrome(failed)">
+    <parameter name="os" value="linux"/>
     <parameter name="browser" value="chrome"/>
     <classes>
-      <class name="testCases.TC0002_Valid_LoginTest">
+      <class name="testCases.TC0001_LoginTest">
         <methods>
           <include name="setup"/>
+          <include name="Invalidlogincheck"/>
           <include name="tearDown"/>
-          <include name="ValidLoginCheck"/>
         </methods>
-      </class> <!-- testCases.TC0002_Valid_LoginTest -->
+      </class> <!-- testCases.TC0001_LoginTest -->
     </classes>
-  </test> <!-- Test(failed) -->
+  </test> <!-- Linux-chrome(failed) -->
 </suite> <!-- Failed suite [Suite] -->

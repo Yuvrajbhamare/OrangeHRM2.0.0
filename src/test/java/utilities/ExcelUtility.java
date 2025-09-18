@@ -13,6 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 //in your any Automation project,you just need to copy paste this utility File 
 public class ExcelUtility {
 	public FileInputStream fi;
@@ -24,8 +25,7 @@ public class ExcelUtility {
 	public CellStyle style;
 	String path;
 
-	public ExcelUtility(String path)
-    {
+	public ExcelUtility(String path) {
 		this.path = path;
 	}
 
@@ -45,23 +45,23 @@ public class ExcelUtility {
 		workbook = new XSSFWorkbook(fi);
 		sheet = workbook.getSheet(sheetname);
 		row = sheet.getRow(rownum);
-		//int Cellcount = row.getLastCellNum();
-		//workbook.close();
-		//fi.close();
-		//return Cellcount;
+		// int Cellcount = row.getLastCellNum();
+		// workbook.close();
+		// fi.close();
+		// return Cellcount;
 		int count = 0;
-	    if (row != null) {
-	        int lastCellNum = row.getLastCellNum();
-	        for (int cn = 0; cn < lastCellNum; cn++) {
-	            XSSFCell currentCell = row.getCell(cn);
-	            if (currentCell != null && currentCell.getCellType() != org.apache.poi.ss.usermodel.CellType.BLANK) {
-	                count++;
-	            }
-	        }
-	    }
-		
-	    return count;
-		
+		if (row != null) {
+			int lastCellNum = row.getLastCellNum();
+			for (int cn = 0; cn < lastCellNum; cn++) {
+				XSSFCell currentCell = row.getCell(cn);
+				if (currentCell != null && currentCell.getCellType() != org.apache.poi.ss.usermodel.CellType.BLANK) {
+					count++;
+				}
+			}
+		}
+
+		return count;
+
 	}
 
 	public String getCellData(String sheetname, int rownum, int colnum) throws IOException {
@@ -94,32 +94,34 @@ public class ExcelUtility {
 		fi = new FileInputStream(path);
 		workbook = new XSSFWorkbook(fi);
 
-		if (workbook.getSheetIndex(sheetname) == -1)// if sheet not exists then create new sheet
+		if (workbook.getSheetIndex(sheetname) == -1) { // if sheet not exists then create new sheet
 			workbook.createSheet(sheetname);
+		}
 		sheet = workbook.getSheet(sheetname);
-		
-		if (sheet.getRow(rownum)==null)//if row not exists then create new row
+
+		if (sheet.getRow(rownum) == null) { // if row not exists then create new row
 			sheet.createRow(rownum);
-		row=sheet.getRow(rownum);
-		
-		cell=row.createCell(colnum);
+		}
+		row = sheet.getRow(rownum);
+
+		cell = row.createCell(colnum);
 		cell.setCellValue(data);
-		fo=new FileOutputStream(path);
+		fo = new FileOutputStream(path);
 		workbook.write(fo);
 		workbook.close();
 		fo.close();
-		
+
 	}
+
 	public void FillGreenColour(String sheetname, int rownum, int colnum) throws IOException {
 
 		fi = new FileInputStream(path);
 		workbook = new XSSFWorkbook(fi);
-		sheet=workbook.getSheet(sheetname);
-		
-		
+		sheet = workbook.getSheet(sheetname);
+
 		row = sheet.getRow(rownum);
 		cell = row.getCell(colnum);
-		
+
 		style = workbook.createCellStyle();
 		style.setFillForegroundColor(IndexedColors.GREEN.getIndex());
 		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
@@ -130,30 +132,26 @@ public class ExcelUtility {
 		fi.close();
 		fo.close();
 	}
-	
+
 	public void FillRedColour(String sheetname, int rownum, int colnum) throws IOException {
 
 		fi = new FileInputStream(path);
-		workbook= new XSSFWorkbook(fi);
+		workbook = new XSSFWorkbook(fi);
 		sheet = workbook.getSheet(sheetname);
 		row = sheet.getRow(rownum);
 		cell = row.getCell(colnum);
-		
+
 		style = workbook.createCellStyle();
 		style.setFillForegroundColor(IndexedColors.RED.getIndex());
 		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
 		cell.setCellStyle(style);
-		
+
 		workbook.write(fo);
 		workbook.close();
 		fi.close();
 		fo.close();
-	
-	
-	
-	
+
 	}
-	
 
 }
